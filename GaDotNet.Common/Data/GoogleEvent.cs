@@ -31,6 +31,8 @@ namespace GaDotNet.Common.Data
 	/// </summary>
 	public class GoogleEvent
 	{
+        public string DomainName { get; private set; }
+
 		public string Category { get; private set; }
 
 		public string Action { get; private set; }
@@ -46,8 +48,10 @@ namespace GaDotNet.Common.Data
 		/// <param name="action">The event action.</param>
 		/// <param name="label">The event label.</param>
 		/// <param name="value">The event value.</param>
-		public GoogleEvent(string category, string action, string label, int? value)
+        public GoogleEvent(string domainName, string category, string action, string label, int? value)
 		{
+            DomainName = domainName;
+
 			Category = category;
 
 			Action = action;
@@ -64,22 +68,22 @@ namespace GaDotNet.Common.Data
 		/// </summary>
 		public void Validate()
 		{
-			if (String.IsNullOrEmpty(Category))
-			{
-				throw new Exception("'Category' is a required field");
-			}
-			if (String.IsNullOrEmpty(Action))
-			{
-				throw new Exception("'Action' is a required field");
-			}
-			if (String.IsNullOrEmpty(Label))
-			{
-				throw new Exception("'Label' is a required field");
-			}
-			if (Value!=null)
-			{
-				throw new Exception("'Value' is a required field");
-			}
+            if (String.IsNullOrEmpty(DomainName))
+            {
+                throw new ArgumentException("'DomainName' is a required field", "DomainName");
+            }
+            if (String.IsNullOrEmpty(Category))
+            {
+                throw new ArgumentException("'Category' is a required field", "Category");
+            }
+            if (String.IsNullOrEmpty(Action))
+            {
+                throw new ArgumentException("'Action' is a required field", "Action");
+            }
+            if (String.IsNullOrEmpty(Label))
+            {
+                throw new ArgumentException("'Label' is a required field", "Label");
+            }
 		}
 	}
 }
