@@ -77,6 +77,7 @@ namespace GaDotNet.Common
 		public static void FireTrackingEvent(TrackingRequest request)
 		{
             WebRequest requestForGaGif = WebRequest.Create(request.TrackingGifUri);
+            requestForGaGif.Proxy = null;
             requestForGaGif.BeginGetResponse(r =>
             {
                 try
